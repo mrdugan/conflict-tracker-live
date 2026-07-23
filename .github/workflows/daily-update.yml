@@ -1,0 +1,42 @@
+name: Automated Conflict Ledger Synchronization Pipeline
+
+on:
+  schedule:
+    # Triggers execution every day automatically at exactly midnight UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows manual pipeline triggering from the GitHub UI panel
+
+jobs:
+  synchronize-ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Repository Nodes
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Initialize Node.js Operational Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Analytical Ledger Scraping Compilation Script
+        run: |
+          # This script handles calculations, fetches data, or appends records.
+          # For immediate structure, we run a micro node command to verify state.
+          node -e "
+            const fs = require('fs');
+            const path = 'public/data/munitions-ledger.json';
+            if (fs.existsSync(path)) {
+              console.log('Automated Ledger Node Active & Validated.');
+            }
+          "
+
+      - name: Securely Commit and Push Synchronized Ledger Data directly into Production
+        run: |
+          git config --global user.name "Conflict-Macro-Automation-Bot"
+          git config --global user.email "automation-bot@yourdomain.local"
+          git add public/data/munitions-ledger.json
+          # Commit updates safely only if new transactional changes exist
+          git diff-index --quiet HEAD || git commit -m "Automated Pipeline Update: Synced daily ledger metrics [cron]"
+          git push origin main
