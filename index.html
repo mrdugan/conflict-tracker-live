@@ -180,7 +180,7 @@
         async function loadLedgerAndInitialize() {
             // Load Kinetic Munitions Ledger
             try {
-                const response = await fetch('public/data/munitions-ledger.json');
+                const response = await fetch('./public/data/munitions-ledger.json');
                 const munitionsData = await response.json();
                 const ledgerDisplayContainer = document.getElementById('event-ledger-display');
                 ledgerDisplayContainer.innerHTML = ''; 
@@ -200,7 +200,7 @@
 
             // Load Daily "Baked" Oil Macro Ledger
             try {
-                const response = await fetch('public/data/macro-ledger.json');
+                const response = await fetch('./public/data/macro-ledger.json');
                 const macroData = await response.json();
                 
                 // Add all historical locked-in days to the total
