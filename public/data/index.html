@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conflict Cost Tracker | Macroeconomic Data Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=Inter:wght@400;500;600;700&display=swap');
+        .ticker-font { font-family: 'Courier Prime', monospace; }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-red-500 selection:text-white">
+
+    <!-- Global Header -->
+    <header class="border-b border-slate-900 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <span class="h-2.5 w-2.5 rounded-full bg-red-500 animate-ping absolute"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-red-600"></span>
+            <h1 class="text-sm font-bold tracking-wider uppercase text-slate-400">Conflict Macro Monitor</h1>
+        </div>
+        <div class="flex items-center space-x-2 text-xs text-slate-500">
+            <span>Status:</span>
+            <span class="text-emerald-400 font-medium bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-900/40">Tracking Live</span>
+        </div>
+    </header>
+
+    <!-- Ad Slot: Header Leaderboard (High CTR Position) -->
+    <div class="max-w-5xl w-full mx-auto px-4 pt-6">
+        <div class="bg-slate-900/40 border border-dashed border-slate-800 p-4 text-center text-xs text-slate-600 rounded-lg">
+            <!-- PLACE YOUR AD NETWORK SCRIPT CODE HERE -->
+            Advertisement / Sponsored Update Tracker
+        </div>
+    </div>
+
+    <!-- Main Dashboard Body -->
+    <main class="max-w-5xl w-full mx-auto px-4 py-8 flex-grow flex flex-col justify-center">
+        
+        <!-- Primary Metrics Display -->
+        <div class="text-center mb-8">
+            <h2 class="text-slate-400 font-medium tracking-wide text-sm md:text-base mb-1">Cumulative Estimated Macroeconomic Cost of Regional Conflict</h2>
+            <p class="text-xs text-slate-600 max-w-xl mx-auto">
+                Grounded evaluation modeling direct defense asset deployments, accrued lifecycle obligations, commodity insurance premiums, and commercial channel halts.
+            </p>
+        </div>
+
+        <!-- The Master Running Ticker Display -->
+        <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-6 md:p-10 shadow-2xl relative overflow-hidden mb-8">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 via-orange-500 to-amber-500"></div>
+            
+            <div id="main-ticker" class="ticker-font text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-emerald-400 my-4 text-center">
+                $0.00
+            </div>
+
+            <!-- Real-Time Split Component Breakdown -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 pt-8 border-t border-slate-900 text-xs text-slate-400">
+                <div class="bg-slate-950/40 border border-slate-900 p-3 rounded-lg">
+                    <span class="text-slate-600 block mb-1 uppercase tracking-wider font-semibold">Military Operations Run Rate</span>
+                    <span id="rate-military" class="text-sm font-bold text-slate-200 ticker-font">$0.00 / sec</span>
+                </div>
+                <div class="bg-slate-950/40 border border-slate-900 p-3 rounded-lg">
+                    <span class="text-slate-600 block mb-1 uppercase tracking-wider font-semibold">Commodity & Supply Premium</span>
+                    <span id="rate-macro" class="text-sm font-bold text-slate-200 ticker-font">$0.00 / sec</span>
+                </div>
+                <div class="bg-slate-950/40 border border-slate-900 p-3 rounded-lg">
+                    <span class="text-slate-600 block mb-1 uppercase tracking-wider font-semibold">Future Veteran Care Liabilities</span>
+                    <span id="rate-va" class="text-sm font-bold text-slate-200 ticker-font">$0.00 / sec</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Secondary Information Blocks & Lead Forms -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 my-4">
+            
+            <!-- Contextual News & Injected Event Metrics -->
+            <div class="lg:col-span-2 bg-slate-900/30 border border-slate-900 p-6 rounded-xl flex flex-col justify-between">
+                <div>
+                    <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider mb-3">Recent Injected Kinetic & Structural Events</h3>
+                    <div id="event-ledger-display" class="space-y-3 text-xs text-slate-400 max-h-48 overflow-y-auto pr-2">
+                        <!-- Items injected dynamically by pipeline data -->
+                        <p class="text-slate-600 animate-pulse">Loading verified structural logs...</p>
+                    </div>
+                </div>
+                
+                <!-- Explicit Subtitle Methodology Toggle Link -->
+                <div class="mt-4 pt-4 border-t border-slate-900 text-center lg:text-left">
+                    <a href="README.md" target="_blank" class="text-xs text-slate-500 hover:text-blue-400 transition-colors underline underline-offset-4">
+                        View Public Accounting Methodology, Mathematical Models & Data Gaps (.txt)
+                    </a>
+                </div>
+            </div>
+
+            <!-- Native Capture Form Block (Building Email Equity) -->
+            <div class="bg-slate-900/50 border border-slate-800 p-6 rounded-xl flex flex-col justify-between">
+                <div>
+                    <h3 class="text-sm font-bold text-slate-200 mb-1">Weekly Geopolitical Macro Report</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-4">
+                        Get data adjustments, policy model breakdowns, and market premium reports sent direct to your inbox.
+                    </p>
+                </div>
+                <!-- Replace target with your newsletter embed link (Beehiiv / Substack / Mailchimp) -->
+                <form action="#" method="POST" class="space-y-2">
+                    <input type="email" required placeholder="Enter secure email address" class="w-full bg-slate-950 text-xs border border-slate-800 rounded px-3 py-2 text-slate-200 focus:outline-none focus:border-slate-700">
+                    <button type="submit" class="w-full bg-slate-200 hover:bg-white text-slate-950 font-bold text-xs py-2 rounded transition-all">
+                        Subscribe to Reports
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Ad Slot: Footer Multiplex Block -->
+    <div class="max-w-5xl w-full mx-auto px-4 pb-6">
+        <div class="bg-slate-900/40 border border-dashed border-slate-800 p-6 text-center text-xs text-slate-600 rounded-lg">
+            <!-- PLACE NATIVE LINK DISCOVERY GRID CODE HERE -->
+            Recommended Global Economy Links
+        </div>
+    </div>
+
+    <!-- Global Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-4 text-center text-[10px] text-slate-700">
+        <p>&copy; 2026 Conflict Macro Monitor. Aggregated analytical estimation frameworks mapped against commodities tickers.</p>
+    </footer>
+
+    <!-- Complete Tracker Logic Script -->
+    <script>
+        // 1. Core Model Constants (Historical baselines & Rules of thumb)
+        const MODEL_CONFIG = {
+            conflictStartDate: new Date("2026-02-28T00:00:00Z").getTime(),
+            peace30YrOilBaseline: 68.00,
+            deployedTroopsFootprint: 50000,
+            carrierGroupsActive: 2,
+            
+            // Standard Fixed Unit Cost Matrices (Rules of Thumb)
+            navalStrikeGroupDailyRun: 7500000,
+            troopTheaterPremiumDaily: 328.76, // $120k annualized per capita
+            vaLiabilityAccrualDaily: 246.57   // $90k annualized long-term liability per capita
+        };
+
+        // 2. Mutable Application Calculations State
+        let calculatedState = {
+            liveOilPricePrice: 84.20,            // Dynamic default fallback values
+            straitClosureImpactPercent: 0.15,    // 15% shipping premium adjustments
+            historicalAccumulatedEventsTotal: 0  // Built from serverless ledger ingest
+        };
+
+        // 3. Mathematical Calculations Loop
+        function runAccountingPipeline() {
+            const now = Date.now();
+            const totalElapsedSeconds = (now - MODEL_CONFIG.conflictStartDate) / 1000;
+
+            // Compute Component A: Active Military Operations Run Rate
+            const dailyNavalCost = MODEL_CONFIG.carrierGroupsActive * MODEL_CONFIG.navalStrikeGroupDailyRun;
+            const dailyPersonnelCost = MODEL_CONFIG.deployedTroopsFootprint * MODEL_CONFIG.troopTheaterPremiumDaily;
+            const militaryPerSecond = (dailyNavalCost + dailyPersonnelCost) / 86400;
+
+            // Compute Component C & D: Macro Premium (Oil spike tax + Strait disruption loss)
+            const oilPremium = Math.max(0, calculatedState.liveOilPricePrice - MODEL_CONFIG.peace30YrOilBaseline);
+            const globalDailyOilTax = oilPremium * 102000000; // 102 million barrels consumed daily globally
+            const dailyStraitDisruptionCost = (20000000 * calculatedState.straitClosureImpactPercent) * calculatedState.liveOilPricePrice;
+            const macroPerSecond = (globalDailyOilTax + dailyStraitDisruptionCost) / 86400;
+
+            // Compute Component E: Long-Term Veteran Lifecycle Liabilities Allocation
+            const dailyVALiabilityCost = MODEL_CONFIG.deployedTroopsFootprint * MODEL_CONFIG.vaLiabilityAccrualDaily;
+            const vaPerSecond = dailyVALiabilityCost / 86400;
+
+            // Combined Dynamic Stream Rate
+            const totalCombinedRatePerSecond = militaryPerSecond + macroPerSecond + vaPerSecond;
+
+            // Compute Unified Structural Macro Total
+            const finalCumulativeTotal = calculatedState.historicalAccumulatedEventsTotal + (totalElapsedSeconds * totalCombinedRatePerSecond);
+
+            // Print values seamlessly to interface
+            document.getElementById('main-ticker').innerText = finalCumulativeTotal.toLocaleString('en-US', {
+                style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2
+            });
+            document.getElementById('rate-military').innerText = `+$${militaryPerSecond.toFixed(2)}/sec`;
+            document.getElementById('rate-macro').innerText = `+$${macroPerSecond.toFixed(2)}/sec`;
+            document.getElementById('rate-va').innerText = `+$${vaPerSecond.toFixed(2)}/sec`;
+        }
+
+        // 4. Serverless Ledger File Ingest Engine
+        async function loadLedgerAndInitialize() {
+            try {
+                const response = await fetch('public/data/munitions-ledger.json');
+                const ledgerData = await response.json();
+                
+                const ledgerDisplayContainer = document.getElementById('event-ledger-display');
+                ledgerDisplayContainer.innerHTML = ''; // Wipe out default fallback placeholder
+
+                // Compile and aggregate logs
+                ledgerData.forEach(event => {
+                    calculatedState.historicalAccumulatedEventsTotal += event.incurredCost;
+                    
+                    // Append data row transparently to ledger feed
+                    const logRow = document.createElement('div');
+                    logRow.className = "flex justify-between items-center border-b border-slate-900 pb-1.5 text-[11px]";
+                    logRow.innerHTML = `
+                        <span class="text-slate-500">${event.date}</span>
+                        <span class="text-slate-300 font-medium px-2 truncate max-w-xs">${event.description}</span>
+                        <span class="text-red-400 font-semibold ticker-font">+$${event.incurredCost.toLocaleString()}</span>
+                    `;
+                    ledgerDisplayContainer.appendChild(logRow);
+                });
+            } catch (e) {
+                console.warn("Ledger missing or building locally. Reverting to structural fallback baselines.");
+                calculatedState.historicalAccumulatedEventsTotal = 420000000; // Baseline structural default cost
+            }
+
+            // Run application calculation frame loop at ~60fps
+            setInterval(runAccountingPipeline, 16.67);
+        }
+
+        // Boot system lifecycle
+        window.addEventListener('DOMContentLoaded', loadLedgerAndInitialize);
+    </script>
+</body>
+</html>
