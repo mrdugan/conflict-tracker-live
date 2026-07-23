@@ -24,11 +24,11 @@ Layer B: Kinetic Munitions & Platform Attrition (Ledger Ingest)
 
 Direct combat expenditures (e.g., Tomahawk launches, SM-6 interceptor uses, drone attrition) are manually indexed based on standard Department of Defense unit procurement costs and injected into munitions-ledger.json as fixed historical accumulation spikes.
 
-Layer C & D: Global Supply Chain Premium (Dynamic API)
+### Layer C & D: The United States Supply Chain Premium (Dynamic API)
 
-Commodity Price Spikes: Calculates the financial delta between live Brent Crude quotes (via Yahoo Finance API BZ=F) and a historical 30-year inflation-adjusted baseline value set at $68.00 per barrel. The difference is multiplied by global demand benchmarks (~102M barrels daily).
+* **Commodity Price Spikes:** Calculates the financial delta between live Brent Crude quotes (via Yahoo Finance API `BZ=F`) and a historical 30-year inflation-adjusted baseline value set at **$68.00 per barrel**. The difference is multiplied by United States domestic demand benchmarks (~20.6 million barrels daily via the U.S. EIA), reflecting the direct "hidden tax" on the American economy.
 
-Chokepoint Disruption Rates: Applies direct cargo rerouting premium models mapped against assumed traffic drops through primary shipping straits.
+* **Chokepoint Disruption Rates:** Applies direct cargo rerouting premium models mapped against assumed traffic drops through primary shipping straits, adjusted for U.S. cargo share.
 
 Layer E: Long-Term Veteran Lifecycle Liabilities
 
