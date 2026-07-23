@@ -125,51 +125,47 @@
 
     <!-- Complete Tracker Logic Script -->
     <script>
-        // 1. Core Model Constants (Historical baselines & Rules of thumb)
+        // 1. Core Model Constants
         const MODEL_CONFIG = {
-            conflictStartDate: new Date("2026-02-28T00:00:00Z").getTime(),
             peace30YrOilBaseline: 68.00,
             deployedTroopsFootprint: 50000,
             carrierGroupsActive: 2,
-            
-            // Standard Fixed Unit Cost Matrices (Rules of Thumb)
             navalStrikeGroupDailyRun: 7500000,
-            troopTheaterPremiumDaily: 328.76, // $120k annualized per capita
-            vaLiabilityAccrualDaily: 246.57   // $90k annualized long-term liability per capita
+            troopTheaterPremiumDaily: 328.76, 
+            vaLiabilityAccrualDaily: 246.57   
         };
 
-        // 2. Mutable Application Calculations State
         let calculatedState = {
-            liveOilPricePrice: 84.20,            // Dynamic default fallback values
-            straitClosureImpactPercent: 0.15,    // 15% shipping premium adjustments
-            historicalAccumulatedEventsTotal: 0  // Built from serverless ledger ingest
+            latestOilPrice: 84.20, // Will be updated by the ledger
+            historicalAccumulatedTotal: 0, // Kinetic events + Past Oil Days
+            secondsSinceMidnight: 0
         };
 
-        // 3. Mathematical Calculations Loop
+        // 2. Mathematical Calculations Loop (Runs at 60fps)
         function runAccountingPipeline() {
-            const now = Date.now();
-            const totalElapsedSeconds = (now - MODEL_CONFIG.conflictStartDate) / 1000;
+            const now = new Date();
+            // Calculate seconds passed ONLY for today
+            const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+            calculatedState.secondsSinceMidnight = (now.getTime() - startOfToday) / 1000;
 
-            // Compute Component A: Active Military Operations Run Rate
+            // Compute Component A: Military Operations Run Rate
             const dailyNavalCost = MODEL_CONFIG.carrierGroupsActive * MODEL_CONFIG.navalStrikeGroupDailyRun;
             const dailyPersonnelCost = MODEL_CONFIG.deployedTroopsFootprint * MODEL_CONFIG.troopTheaterPremiumDaily;
             const militaryPerSecond = (dailyNavalCost + dailyPersonnelCost) / 86400;
 
-            // Compute Component C & D: Macro Premium (Oil spike tax + Strait disruption loss)
-            const oilPremium = Math.max(0, calculatedState.liveOilPricePrice - MODEL_CONFIG.peace30YrOilBaseline);
-            const globalDailyOilTax = oilPremium * 102000000; // 102 million barrels consumed daily globally
-            const dailyStraitDisruptionCost = (20000000 * calculatedState.straitClosureImpactPercent) * calculatedState.liveOilPricePrice;
-            const macroPerSecond = (globalDailyOilTax + dailyStraitDisruptionCost) / 86400;
+            // Compute Component C: Today's live Oil Premium (Only for today's seconds)
+            const oilPremium = Math.max(0, calculatedState.latestOilPrice - MODEL_CONFIG.peace30YrOilBaseline);
+            const globalDailyOilTax = oilPremium * 102000000; 
+            const macroPerSecond = globalDailyOilTax / 86400;
 
-            // Compute Component E: Long-Term Veteran Lifecycle Liabilities Allocation
+            // Compute Component E: Long-Term Veteran Liabilities
             const dailyVALiabilityCost = MODEL_CONFIG.deployedTroopsFootprint * MODEL_CONFIG.vaLiabilityAccrualDaily;
             const vaPerSecond = dailyVALiabilityCost / 86400;
 
-            // Combined Dynamic Stream Rate
             const totalCombinedRatePerSecond = militaryPerSecond + macroPerSecond + vaPerSecond;
 
-            // Compute Unified Structural Macro Total
-            const finalCumulativeTotal = calculatedState.historicalAccumulatedEventsTotal + (totalElapsedSeconds * totalCombinedRatePerSecond);
+            // Absolute Total = Historical "Baked" Past + Today's live ticking
+            const finalCumulativeTotal = calculatedState.historicalAccumulatedTotal + (calculatedState.secondsSinceMidnight * totalCombinedRatePerSecond);
 
             // Print values seamlessly to interface
             document.getElementById('main-ticker').innerText = finalCumulativeTotal.toLocaleString('en-US', {
@@ -180,20 +176,17 @@
             document.getElementById('rate-va').innerText = `+$${vaPerSecond.toFixed(2)}/sec`;
         }
 
-        // 4. Serverless Ledger File Ingest Engine
+        // 3. Serverless Ingest Engine (Loads BOTH ledgers)
         async function loadLedgerAndInitialize() {
+            // Load Kinetic Munitions Ledger
             try {
                 const response = await fetch('public/data/munitions-ledger.json');
-                const ledgerData = await response.json();
-                
+                const munitionsData = await response.json();
                 const ledgerDisplayContainer = document.getElementById('event-ledger-display');
-                ledgerDisplayContainer.innerHTML = ''; // Wipe out default fallback placeholder
+                ledgerDisplayContainer.innerHTML = ''; 
 
-                // Compile and aggregate logs
-                ledgerData.forEach(event => {
-                    calculatedState.historicalAccumulatedEventsTotal += event.incurredCost;
-                    
-                    // Append data row transparently to ledger feed
+                munitionsData.forEach(event => {
+                    calculatedState.historicalAccumulatedTotal += event.incurredCost;
                     const logRow = document.createElement('div');
                     logRow.className = "flex justify-between items-center border-b border-slate-900 pb-1.5 text-[11px]";
                     logRow.innerHTML = `
@@ -203,15 +196,23 @@
                     `;
                     ledgerDisplayContainer.appendChild(logRow);
                 });
-            } catch (e) {
-                console.warn("Ledger missing or building locally. Reverting to structural fallback baselines.");
-                calculatedState.historicalAccumulatedEventsTotal = 420000000; // Baseline structural default cost
-            }
+            } catch (e) { console.warn("Kinetic Ledger missing or building locally."); }
+
+            // Load Daily "Baked" Oil Macro Ledger
+            try {
+                const response = await fetch('public/data/macro-ledger.json');
+                const macroData = await response.json();
+                
+                // Add all historical locked-in days to the total
+                macroData.forEach(day => {
+                    calculatedState.historicalAccumulatedTotal += day.dailyAccumulatedCost;
+                    calculatedState.latestOilPrice = day.closingOilPrice; // Set the live rate to the most recent pull
+                });
+            } catch (e) { console.warn("Macro Ledger building tonight at midnight."); }
 
             // Run application calculation frame loop at ~60fps
             setInterval(runAccountingPipeline, 16.67);
         }
-
         // Boot system lifecycle
         window.addEventListener('DOMContentLoaded', loadLedgerAndInitialize);
     </script>
