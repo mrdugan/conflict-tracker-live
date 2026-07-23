@@ -1,22 +1,27 @@
 [
   {
-    "date": "2026-02-28",
+    "date": "2026-01-15",
     "description": "Initial Strategic Intercept Manifest Deployment",
     "incurredCost": 300000000
   },
   {
-    "date": "2026-03-15",
+    "date": "2026-02-28",
     "description": "Carrier Taskforce Air Engagement Operations",
     "incurredCost": 85000000
   },
   {
-    "date": "2026-04-02",
-    "description": "Assigned Airframe Asset Chassis Attrition Loss",
+    "date": "2026-03-15",
+    "description": "Airframe Asset Chassis Attrition Loss",
     "incurredCost": 45000000
   },
   {
+    "date": "2026-04-02",
+    "description": "Strategic Asset Repositioning & Logistical Surge",
+    "incurredCost": 120000000
+  },
+  {
     "date": "2026-07-22",
-    "description": "Additional interceptor munitions expended",
+    "description": "Additional Interceptor Munitions Expended",
     "incurredCost": 45000000
   }
 ]
