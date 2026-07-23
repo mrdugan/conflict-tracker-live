@@ -1,42 +1,75 @@
-name: Automated Conflict Ledger Synchronization Pipeline
+name: Automated Macroeconomic Sync Pipeline
 
 on:
   schedule:
-    # Triggers execution every day automatically at exactly midnight UTC
-    - cron: '0 0 * * *'
-  workflow_dispatch: # Allows manual pipeline triggering from the GitHub UI panel
+    - cron: '0 0 * * *' # Runs exactly at midnight UTC
+  workflow_dispatch: # Allows manual clicking
+
+permissions:
+  contents: write # Grants the action permission to save the file
 
 jobs:
-  synchronize-ledger:
+  daily-oil-bake-in:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code Repository Nodes
+      - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Initialize Node.js Operational Environment
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Run Analytical Ledger Scraping Compilation Script
+      - name: Fetch Live Market Data & Bake Daily Ledger
         run: |
-          # This script handles calculations, fetches data, or appends records.
-          # For immediate structure, we run a micro node command to verify state.
           node -e "
             const fs = require('fs');
-            const path = 'public/data/munitions-ledger.json';
-            if (fs.existsSync(path)) {
-              console.log('Automated Ledger Node Active & Validated.');
+            
+            async function updateMarketData() {
+              try {
+                // Fetch free live Brent Crude data from Yahoo Finance
+                const response = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/BZ=F');
+                const data = await response.json();
+                const currentOilPrice = data.chart.result[0].meta.regularMarketPrice;
+                
+                // Mathematical Rules
+                const peaceBaseline = 68.00;
+                const globalDemand = 102000000;
+                
+                // Calculate today's specific premium
+                const oilPremium = Math.max(0, currentOilPrice - peaceBaseline);
+                const dailyMacroCost = oilPremium * globalDemand;
+                
+                // Load or create the macro ledger
+                const ledgerPath = 'public/data/macro-ledger.json';
+                let macroLedger = [];
+                if (fs.existsSync(ledgerPath)) {
+                  macroLedger = JSON.parse(fs.readFileSync(ledgerPath));
+                }
+                
+                // Bake in today's truth
+                macroLedger.push({
+                  date: new Date().toISOString().split('T')[0],
+                  closingOilPrice: currentOilPrice,
+                  dailyAccumulatedCost: dailyMacroCost
+                });
+                
+                // Save the file
+                fs.mkdirSync('public/data', { recursive: true });
+                fs.writeFileSync(ledgerPath, JSON.stringify(macroLedger, null, 2));
+                console.log('Daily Macro data baked successfully. Oil closed at: $' + currentOilPrice);
+                
+              } catch (err) {
+                console.error('Failed to fetch market data:', err);
+              }
             }
+            updateMarketData();
           "
 
-      - name: Securely Commit and Push Synchronized Ledger Data directly into Production
+      - name: Commit and Push the Daily Truth
         run: |
-          git config --global user.name "Conflict-Macro-Automation-Bot"
-          git config --global user.email "automation-bot@yourdomain.local"
-          git add public/data/munitions-ledger.json
-          # Commit updates safely only if new transactional changes exist
-          git diff-index --quiet HEAD || git commit -m "Automated Pipeline Update: Synced daily ledger metrics [cron]"
+          git config --global user.name "Market-Sync-Bot"
+          git config --global user.email "bot@macro-tracker.local"
+          git add public/data/macro-ledger.json
+          git diff-index --quiet HEAD || git commit -m "Automated Market Sync: Baked daily oil premium [cron]"
           git push origin main
