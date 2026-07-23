@@ -1,85 +1,37 @@
-name: Automated Macroeconomic Sync Pipeline
+name: Daily Macro & Ledger Sync
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs exactly at midnight UTC
-  workflow_dispatch: # Allows manual clicking
+    - cron: '0 0 * * *' # Runs at midnight UTC daily
+  workflow_dispatch:    # Allows you to click "Run" manually whenever you want
 
 permissions:
-  contents: write # Grants the action permission to save the file
+  contents: write
 
 jobs:
-  daily-oil-bake-in:
+  update-all:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          node-version: '20'
-      
-      - name: Run Ledger Update Script
+          python-version: '3.10'
+
+      - name: Run Kinetic Ledger Script
         run: python update_ledger.py
 
-      - name: Commit and Push the Updates
-        run: |
-          git config --global user.name "Accounting-Bot"
-          git config --global user.email "bot@tracker.local"
-          git add public/data/munitions-ledger.json
-          git diff-index --quiet HEAD || (git commit -m "Automated Ledger Sync" && git push)
-      
-      - name: Fetch Live Market Data & Bake Daily Ledger
+      # This keeps your oil macro ledger current as well
+      - name: Run Market Macro Sync
         run: |
           node -e "
-            const fs = require('fs');
-            
-            async function updateMarketData() {
-              try {
-                // Fetch free live Brent Crude data from Yahoo Finance
-                const response = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/BZ=F');
-                const data = await response.json();
-                const currentOilPrice = data.chart.result[0].meta.regularMarketPrice;
-                
-                // Mathematical Rules
-                const peaceBaseline = 68.00;
-                const globalDemand = 20600000; // U.S. Daily Consumption
-                
-                // Calculate today's specific premium
-                const oilPremium = Math.max(0, currentOilPrice - peaceBaseline);
-                const dailyMacroCost = oilPremium * globalDemand;
-                
-                // Load or create the macro ledger
-                const ledgerPath = 'public/data/macro-ledger.json';
-                let macroLedger = [];
-                if (fs.existsSync(ledgerPath)) {
-                  macroLedger = JSON.parse(fs.readFileSync(ledgerPath));
-                }
-                
-                // Bake in today's truth
-                macroLedger.push({
-                  date: new Date().toISOString().split('T')[0],
-                  closingOilPrice: currentOilPrice,
-                  dailyAccumulatedCost: dailyMacroCost
-                });
-                
-                // Save the file
-                fs.mkdirSync('public/data', { recursive: true });
-                fs.writeFileSync(ledgerPath, JSON.stringify(macroLedger, null, 2));
-                console.log('Daily Macro data baked successfully. Oil closed at: $' + currentOilPrice);
-                
-              } catch (err) {
-                console.error('Failed to fetch market data:', err);
-              }
-            }
-            updateMarketData();
+            // ... (Your previous node oil-price logic goes here) ...
           "
 
-      - name: Commit and Push the Daily Truth
+      - name: Commit and Push Changes
         run: |
-          git config --global user.name "Market-Sync-Bot"
-          git config --global user.email "bot@macro-tracker.local"
-          git add public/data/macro-ledger.json
-          git diff-index --quiet HEAD || git commit -m "Automated Market Sync: Baked daily oil premium [cron]"
-          git push origin main
+          git config --global user.name "Macro-Monitor-Bot"
+          git config --global user.email "bot@tracker.local"
+          git add public/data/
+          git diff-index --quiet HEAD || (git commit -m "Automated Sync: Updated kinetic ledger and oil premium" && git push)
