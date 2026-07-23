@@ -144,7 +144,6 @@
         // 2. Mathematical Calculations Loop (Runs at 60fps)
         function runAccountingPipeline() {
             const now = new Date();
-            // Calculate seconds passed ONLY for today
             const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
             calculatedState.secondsSinceMidnight = (now.getTime() - startOfToday) / 1000;
 
@@ -153,9 +152,9 @@
             const dailyPersonnelCost = MODEL_CONFIG.deployedTroopsFootprint * MODEL_CONFIG.troopTheaterPremiumDaily;
             const militaryPerSecond = (dailyNavalCost + dailyPersonnelCost) / 86400;
 
-            // Compute Component C: Today's live Oil Premium (Only for today's seconds)
+            // Compute Component C: Today's live Oil Premium (U.S. Only - 20.6M barrels daily)
             const oilPremium = Math.max(0, calculatedState.latestOilPrice - MODEL_CONFIG.peace30YrOilBaseline);
-            const globalDailyOilTax = oilPremium * 20600000; // U.S. Daily Consumption (20.6M barrels)
+            const globalDailyOilTax = oilPremium * 20600000; 
             const macroPerSecond = globalDailyOilTax / 86400;
 
             // Compute Component E: Long-Term Veteran Liabilities
@@ -176,13 +175,14 @@
             document.getElementById('rate-va').innerText = `+$${vaPerSecond.toFixed(2)}/sec`;
         }
 
-        // 3. Serverless Ingest Engine (Loads BOTH ledgers)
+        // 3. Serverless Ingest Engine (Loads BOTH ledgers safely)
         async function loadLedgerAndInitialize() {
+            const ledgerDisplayContainer = document.getElementById('event-ledger-display');
+
             // Load Kinetic Munitions Ledger
             try {
                 const response = await fetch('./public/data/munitions-ledger.json');
                 const munitionsData = await response.json();
-                const ledgerDisplayContainer = document.getElementById('event-ledger-display');
                 ledgerDisplayContainer.innerHTML = ''; 
 
                 munitionsData.forEach(event => {
@@ -196,23 +196,28 @@
                     `;
                     ledgerDisplayContainer.appendChild(logRow);
                 });
-            } catch (e) { console.warn("Kinetic Ledger missing or building locally."); }
+            } catch (e) { 
+                console.warn("Kinetic Ledger missing or failed to parse.", e); 
+                ledgerDisplayContainer.innerHTML = '<span class="text-slate-600">No verified structural events recorded yet.</span>';
+            }
 
             // Load Daily "Baked" Oil Macro Ledger
             try {
                 const response = await fetch('./public/data/macro-ledger.json');
                 const macroData = await response.json();
                 
-                // Add all historical locked-in days to the total
                 macroData.forEach(day => {
                     calculatedState.historicalAccumulatedTotal += day.dailyAccumulatedCost;
-                    calculatedState.latestOilPrice = day.closingOilPrice; // Set the live rate to the most recent pull
+                    calculatedState.latestOilPrice = day.closingOilPrice;
                 });
-            } catch (e) { console.warn("Macro Ledger building tonight at midnight."); }
+            } catch (e) { 
+                console.warn("Macro Ledger building tonight at midnight."); 
+            }
 
             // Run application calculation frame loop at ~60fps
             setInterval(runAccountingPipeline, 16.67);
         }
+
         // Boot system lifecycle
         window.addEventListener('DOMContentLoaded', loadLedgerAndInitialize);
     </script>
