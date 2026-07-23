@@ -1,0 +1,17 @@
+[
+  {
+    "date": "2026-02-28",
+    "description": "Initial Strategic Intercept Manifest Deployment",
+    "incurredCost": 300000000
+  },
+  {
+    "date": "2026-03-15",
+    "description": "Carrier Taskforce Air Engagement Operations",
+    "incurredCost": 85000000
+  },
+  {
+    "date": "2026-04-02",
+    "description": "Assigned Airframe Asset Chassis Attrition Loss",
+    "incurredCost": 45000000
+  }
+]
