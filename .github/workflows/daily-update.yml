@@ -34,7 +34,7 @@ jobs:
                 
                 // Mathematical Rules
                 const peaceBaseline = 68.00;
-                const globalDemand = 102000000;
+                const globalDemand = 20600000; // U.S. Daily Consumption
                 
                 // Calculate today's specific premium
                 const oilPremium = Math.max(0, currentOilPrice - peaceBaseline);
