@@ -19,7 +19,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      
+      - name: Run Ledger Update Script
+        run: python update_ledger.py
 
+      - name: Commit and Push the Updates
+        run: |
+          git config --global user.name "Accounting-Bot"
+          git config --global user.email "bot@tracker.local"
+          git add public/data/munitions-ledger.json
+          git diff-index --quiet HEAD || (git commit -m "Automated Ledger Sync" && git push)
+      
       - name: Fetch Live Market Data & Bake Daily Ledger
         run: |
           node -e "
