@@ -155,7 +155,7 @@
 
             // Compute Component C: Today's live Oil Premium (Only for today's seconds)
             const oilPremium = Math.max(0, calculatedState.latestOilPrice - MODEL_CONFIG.peace30YrOilBaseline);
-            const globalDailyOilTax = oilPremium * 102000000; 
+            const globalDailyOilTax = oilPremium * 20600000; // U.S. Daily Consumption (20.6M barrels)
             const macroPerSecond = globalDailyOilTax / 86400;
 
             // Compute Component E: Long-Term Veteran Liabilities
