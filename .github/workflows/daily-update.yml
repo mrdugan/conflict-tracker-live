@@ -2,8 +2,8 @@ name: Daily Macro & Ledger Sync
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight UTC daily
-  workflow_dispatch:    # Allows you to click "Run" manually whenever you want
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -17,16 +17,42 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.12'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
 
       - name: Run Kinetic Ledger Script
         run: python update_ledger.py
 
-      # This keeps your oil macro ledger current as well
       - name: Run Market Macro Sync
         run: |
           node -e "
-            // ... (Your previous node oil-price logic goes here) ...
+            const fs = require('fs');
+            async function update() {
+              try {
+                const response = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/BZ=F');
+                const data = await response.json();
+                const price = data.chart.result[0].meta.regularMarketPrice;
+                const premium = Math.max(0, price - 68.00);
+                const dailyCost = premium * 20600000;
+                
+                const path = 'public/data/macro-ledger.json';
+                let ledger = [];
+                if (fs.existsSync(path)) ledger = JSON.parse(fs.readFileSync(path));
+                
+                ledger.push({
+                  date: new Date().toISOString().split('T')[0],
+                  closingOilPrice: price,
+                  dailyAccumulatedCost: dailyCost
+                });
+                
+                fs.writeFileSync(path, JSON.stringify(ledger, null, 2));
+              } catch (e) { console.error(e); process.exit(1); }
+            }
+            update();
           "
 
       - name: Commit and Push Changes
