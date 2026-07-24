@@ -1,6 +1,27 @@
 [
-  { "date": "2026-04-23", "closingOilPrice": 82.50, "dailyAccumulatedCost": 298700000 },
-  { "date": "2026-05-23", "closingOilPrice": 83.10, "dailyAccumulatedCost": 311060000 },
-  { "date": "2026-06-23", "closingOilPrice": 83.80, "dailyAccumulatedCost": 325480000 },
-  { "date": "2026-07-23", "closingOilPrice": 84.20, "dailyAccumulatedCost": 333720000 }
+  {
+    "date": "2026-04-23",
+    "closingOilPrice": 82.5,
+    "dailyAccumulatedCost": 298700000
+  },
+  {
+    "date": "2026-05-23",
+    "closingOilPrice": 83.1,
+    "dailyAccumulatedCost": 311060000
+  },
+  {
+    "date": "2026-06-23",
+    "closingOilPrice": 83.8,
+    "dailyAccumulatedCost": 325480000
+  },
+  {
+    "date": "2026-07-23",
+    "closingOilPrice": 84.2,
+    "dailyAccumulatedCost": 333720000
+  },
+  {
+    "date": "2026-07-24",
+    "closingOilPrice": 100.41,
+    "dailyAccumulatedCost": 667645999.9999999
+  }
 ]
