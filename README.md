@@ -1,41 +1,45 @@
 Conflict Cost Tracker: Macroeconomic Estimation Framework
 
-This project tracks the running cumulative cost variables associated with regional actions through a strict mathematical model. The intent is to map out available, open-source economic data points into a single, cohesive structural ledger rather than relying on unverified estimations or back-propagated averages.
+This project tracks the cumulative cost variables and verified personnel impacts associated with regional actions. The framework moves beyond raw estimations, utilizing a structured, automated accounting ledger to ensure macroeconomic transparency.
 
 The "Daily Bake-in" Accounting Architecture
 
-Most live-ticking calculators contain a fatal flaw: if oil spikes to $95 today, they retroactively multiply that new high price against the entire timeline of the conflict, creating a massive, artificially inflated number.
+To ensure data integrity, this tracker utilizes an automated Daily Bake-in Model:
 
-To ensure absolute macroeconomic truth, this tracker utilizes an automated Daily Bake-in Model:
+Historical Lock: Every night at midnight UTC, a serverless pipeline fetches the daily closing price of Brent Crude oil. It calculates the financial delta between live quotes and a historical $68.00/barrel baseline, locking that premium into the macro-ledger.json.
 
-Historical Lock: Every night at midnight UTC, an automated serverless pipeline fetches the daily closing price of Brent Crude oil. It calculates the exact macroeconomic premium paid by the global economy for that specific day and permanently locks it into a static JSON ledger (macro-ledger.json).
+Automated Analyst (Python/GitHub Actions): We utilize an integrated "Robot Analyst" pipeline. This Python-based agent (update_ledger.py) synchronizes verified kinetic expenditures and confirmed personnel casualties. By automating the ledger updates, we ensure the dashboard remains a dynamic, authoritative monitor rather than a static report.
 
-Live Ticking: The real-time ticker on the dashboard only calculates the live burn-rate for the seconds that have elapsed since midnight today.
+Accounting Pillars
 
-Mathematical Component Assumptions
+1. Military & Kinetic Operations
 
-Layer A: Military Operations Run Rate (Fixed Baseline)
+Operational Run Rate: Standardized daily theater costs including Naval Carrier Strike Group (CSG) deployments and personnel hazardous duty premiums.
 
-Naval Assets: Calculated assuming a fixed standard run rate of $7.5M per day per Carrier Strike Group (CSG) in active theater deployment zones.
+Munitions Ledger: Verified expenditures (e.g., interceptor launches, drone attrition) are indexed via our munitions-ledger.json and automatically calculated into the cumulative total.
 
-Personnel Premiums: Modeled assuming an aggregate theater hazardous deployment premium of $120,000 annually per capita mapped across public CENTCOM force evaluations (~50,000 personnel nodes).
+2. Personnel Impact Tracking
 
-Layer B: Kinetic Munitions & Platform Attrition (Ledger Ingest)
+Verified Casualty Ledger: Personnel impacts are maintained in a structured log (casualty-ledger.json). This ledger aggregates confirmed mission manifests and verified casualty counts, ensuring a human-cost-first view of operational intensity.
 
-Direct combat expenditures (e.g., Tomahawk launches, SM-6 interceptor uses, drone attrition) are manually indexed based on standard Department of Defense unit procurement costs and injected into munitions-ledger.json as fixed historical accumulation spikes.
+3. Global Supply Chain & Commodities
 
-### Layer C & D: The United States Supply Chain Premium (Dynamic API)
+Dynamic Oil Premium: The model tracks the financial delta applied to the global supply chain (~102M barrels daily) based on live Brent Crude market variations.
 
-* **Commodity Price Spikes:** Calculates the financial delta between live Brent Crude quotes (via Yahoo Finance API `BZ=F`) and a historical 30-year inflation-adjusted baseline value set at **$68.00 per barrel**. The difference is multiplied by United States domestic demand benchmarks (~20.6 million barrels daily via the U.S. EIA), reflecting the direct "hidden tax" on the American economy.
+4. Veteran Lifecycle Liabilities
 
-* **Chokepoint Disruption Rates:** Applies direct cargo rerouting premium models mapped against assumed traffic drops through primary shipping straits, adjusted for U.S. cargo share.
+Deferred Structural Care: Accrues a structural liability model of $90,000 per soldier/year of deployment, mapped against Congressional Budget Office long-term care projections.
 
-Layer E: Long-Term Veteran Lifecycle Liabilities
+Maintaining the Ledger
 
-Accrues a deferred structural care liability of $90,000 per soldier for each year of deployment, based on historical Congressional Budget Office evaluations tracking long-term medical care and disability programs over a 30-to-40 year cycle.
+This dashboard is designed as a Deterministic Accounting Engine.
 
-Known Calculation Gaps (Analytical Blind Spots)
+Data Verification: Ledger entries are manually curated and injected to prevent "noisy" or unverified data from contaminating the cost model.
 
-Counterfactual Modeling Limits: The data model assumes a flat peace baseline price for oil, but cannot predict alternative macroeconomic variations that would occur in the total absence of war (e.g., natural disasters affecting refineries).
+Automation: Once verified, data is committed to the repository, triggering an automated reconciliation that updates the dashboard ticker globally.
 
-Classified Black Budget Lines: Special operations funding streams, cyber logistics, and tactical intelligence gathering distributions are omitted due to operational security classification blocks.
+Known Calculation Gaps
+
+Operational Security: Classified funding streams (cyber-logistics, tactical intelligence) remain omitted to respect operational security parameters.
+
+Counterfactual Modeling: The model assumes a "flat peace" baseline. It cannot account for non-conflict market variables (e.g., natural refinery disasters).
