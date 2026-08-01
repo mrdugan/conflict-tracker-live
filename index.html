@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+E html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,35 +9,24 @@
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=Inter:wght@400;500;600;700&display=swap');
         .ticker-font { font-family: 'Courier Prime', monospace; }
         body { font-family: 'Inter', sans-serif; }
-        <style>
-        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=Inter:wght@400;500;600;700&display=swap');
-        .ticker-font { font-family: 'Courier Prime', monospace; }
-        body { font-family: 'Inter', sans-serif; }
-        
-        /* New high-contrast casualty styling */
-        .casualty-card {
-            background-color: #1a0505; 
-            border-color: #7f1d1d;
-        }
-        .text-casualty {
-            color: #fca5a5; /* A soft, readable red */
-            text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
-        }
-    </style>
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-red-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-rose-500 selection:text-white">
 
     <!-- Global Header -->
     <header class="border-b border-slate-900 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
         <div class="flex items-center space-x-3">
-            <span class="h-2.5 w-2.5 rounded-full bg-red-500 animate-ping absolute"></span>
-            <span class="h-2.5 w-2.5 rounded-full bg-red-600"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-rose-500 animate-ping absolute"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-rose-600"></span>
             <h1 class="text-sm font-bold tracking-wider uppercase text-slate-400">Conflict Macro Monitor</h1>
         </div>
-        <div class="flex items-center space-x-2 text-xs text-slate-500">
-            <span>Status:</span>
-            <span class="text-emerald-400 font-medium bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-900/40">Tracking Live</span>
+        <div class="flex items-center space-x-4 text-xs">
+            <!-- Methodology Link to GitHub -->
+            <a href="https://github.com/mrdugan/conflict-tracker-live#readme" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors font-medium border-b border-transparent hover:border-blue-400 hidden sm:block">Methodology & Source</a>
+            <div class="flex items-center space-x-2 text-slate-500">
+                <span>Status:</span>
+                <span class="text-emerald-400 font-medium bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-900/40">Tracking Live</span>
+            </div>
         </div>
     </header>
 
@@ -50,7 +39,7 @@
 
         <!-- The Master Running Ticker Display -->
         <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-6 md:p-10 shadow-2xl relative overflow-hidden mb-8">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 via-orange-500 to-amber-500"></div>
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose-600 via-orange-500 to-amber-500"></div>
             
             <div id="main-ticker" class="ticker-font text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-emerald-400 my-4 text-center">
                 $0.00
@@ -75,6 +64,7 @@
         <!-- Grid: Recent Ledger + Casualty Counter -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 my-4">
             
+            <!-- Kinetic Ledger -->
             <div class="lg:col-span-2 bg-slate-900/30 border border-slate-900 p-6 rounded-xl flex flex-col justify-between">
                 <div>
                     <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider mb-3">Recent Injected Kinetic & Structural Events</h3>
@@ -84,23 +74,34 @@
                 </div>
             </div>
 
-            <!-- Casualty Counter -->
-            <div class="bg-red-950/10 border border-red-900/30 p-6 rounded-xl flex flex-col justify-between">
+            <!-- Casualty Counter (Updated with Rose styling for contrast) -->
+            <div class="bg-rose-950/20 border border-rose-900/40 p-6 rounded-xl flex flex-col justify-between shadow-lg">
                 <div>
-                    <h3 class="text-sm font-bold text-red-400 mb-1 uppercase tracking-wider">Verified Personnel Casualties</h3>
-                    <p class="text-[10px] text-red-800/80 leading-relaxed mb-4">
-                        Aggregated from verified mission logs and casualty manifest reports. 
+                    <h3 class="text-sm font-bold text-rose-300 mb-1 uppercase tracking-wider">Estimated Personnel Impact</h3>
+                    <p class="text-[11px] text-rose-200/70 leading-relaxed mb-4">
+                        Pentagon data adjusted by 1.25x analytical lag coefficient. 
                     </p>
                 </div>
-                <!-- OLD: text-red-500 (Hard to read) -->
-                <!-- NEW: text-red-300 (Higher luminance, much better contrast) -->
-                <div id="casualty-counter" class="text-4xl font-bold text-red-300 ticker-font">
+                <div id="casualty-counter" class="text-4xl font-bold text-rose-400 ticker-font drop-shadow-md">
                     0
                 </div>
-                <div class="text-[10px] text-red-900/60 mt-2 font-semibold">
-                    TOTAL CONFIRMED IMPACTS
+                <div class="text-[10px] text-rose-300/60 mt-2 font-semibold uppercase tracking-widest">
+                    Total Estimated Impacts
                 </div>
             </div>
+        </div>
+
+        <!-- Support & Bio Banner -->
+        <div class="mt-8 mb-4 bg-gradient-to-r from-amber-900/40 to-orange-900/10 border border-amber-700/50 p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between shadow-lg">
+            <div class="mb-5 md:mb-0 md:pr-6 text-center md:text-left">
+                <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-2">About The Developer</h4>
+                <p class="text-[13px] text-amber-200/80 leading-relaxed max-w-3xl">
+                    PoliSci grad, rescue helicopter pilot, and dad of two girls, experimenting with code to bring ideas to life. If this dashboard saved you some time (or won you an argument), consider dropping a tip in the jar!
+                </p>
+            </div>
+            <a href="https://buymeacoffee.com/patdugan" target="_blank" class="shrink-0 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-lg text-sm transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_rgba(245,158,11,0.6)] flex items-center space-x-2">
+                <span>☕ Buy Me a Coffee</span>
+            </a>
         </div>
     </main>
 
@@ -156,6 +157,7 @@
 
             // 1. Munitions
             try {
+                // Adjust to './data/...' if you encounter 404 errors on your live site
                 const response = await fetch('./public/data/munitions-ledger.json');
                 const munitionsData = await response.json();
                 ledgerDisplayContainer.innerHTML = ''; 
@@ -163,7 +165,8 @@
                     calculatedState.historicalAccumulatedTotal += event.incurredCost;
                     const logRow = document.createElement('div');
                     logRow.className = "flex justify-between items-center border-b border-slate-900 pb-1.5 text-[11px]";
-                    logRow.innerHTML = `<span class="text-slate-500">${event.date}</span><span class="text-slate-300 font-medium px-2 truncate max-w-xs">${event.description}</span><span class="text-red-400 font-semibold ticker-font">+$${event.incurredCost.toLocaleString()}</span>`;
+                    // Updated the money color here to Rose-400 for better readability
+                    logRow.innerHTML = `<span class="text-slate-500">${event.date}</span><span class="text-slate-300 font-medium px-2 truncate max-w-xs">${event.description}</span><span class="text-rose-400 font-semibold ticker-font">+$${event.incurredCost.toLocaleString()}</span>`;
                     ledgerDisplayContainer.appendChild(logRow);
                 });
             } catch (e) { console.warn("Kinetic Ledger missing."); }
@@ -183,7 +186,11 @@
                 const response = await fetch('./public/data/casualty-ledger.json');
                 const casualtyData = await response.json();
                 let totalCasualties = casualtyData.reduce((acc, entry) => acc + (entry.confirmedCasualties || entry.incurredCasualties || 0), 0);
-                document.getElementById('casualty-counter').innerText = totalCasualties.toLocaleString();
+                
+                // Apply the 1.25x analytical lag coefficient here for the display
+                const estimatedImpact = Math.floor(totalCasualties * 1.25);
+                
+                document.getElementById('casualty-counter').innerText = estimatedImpact.toLocaleString();
             } catch (e) { console.warn("Casualty ledger missing."); }
 
             setInterval(runAccountingPipeline, 16.67);
