@@ -26,23 +26,11 @@
         </div>
     </header>
 
-    <!-- Ad Slot: Header Leaderboard (High CTR Position) -->
-    <div class="max-w-5xl w-full mx-auto px-4 pt-6">
-        <div class="bg-slate-900/40 border border-dashed border-slate-800 p-4 text-center text-xs text-slate-600 rounded-lg">
-            <!-- PLACE YOUR AD NETWORK SCRIPT CODE HERE -->
-            Advertisement / Sponsored Update Tracker
-        </div>
-    </div>
-
     <!-- Main Dashboard Body -->
     <main class="max-w-5xl w-full mx-auto px-4 py-8 flex-grow flex flex-col justify-center">
         
-        <!-- Primary Metrics Display -->
         <div class="text-center mb-8">
             <h2 class="text-slate-400 font-medium tracking-wide text-sm md:text-base mb-1">Cumulative Estimated Macroeconomic Cost of Regional Conflict</h2>
-            <p class="text-xs text-slate-600 max-w-xl mx-auto">
-                Grounded evaluation modeling direct defense asset deployments, accrued lifecycle obligations, commodity insurance premiums, and commercial channel halts.
-            </p>
         </div>
 
         <!-- The Master Running Ticker Display -->
@@ -53,7 +41,6 @@
                 $0.00
             </div>
 
-            <!-- Real-Time Split Component Breakdown -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 pt-8 border-t border-slate-900 text-xs text-slate-400">
                 <div class="bg-slate-950/40 border border-slate-900 p-3 rounded-lg">
                     <span class="text-slate-600 block mb-1 uppercase tracking-wider font-semibold">Military Operations Run Rate</span>
@@ -70,72 +57,41 @@
             </div>
         </div>
 
-        <!-- Secondary Information Blocks & Lead Forms -->
+        <!-- Grid: Recent Ledger + Casualty Counter -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 my-4">
             
-            <!-- Contextual News & Injected Event Metrics -->
             <div class="lg:col-span-2 bg-slate-900/30 border border-slate-900 p-6 rounded-xl flex flex-col justify-between">
                 <div>
                     <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider mb-3">Recent Injected Kinetic & Structural Events</h3>
                     <div id="event-ledger-display" class="space-y-3 text-xs text-slate-400 max-h-48 overflow-y-auto pr-2">
-                        <!-- Items injected dynamically by pipeline data -->
                         <p class="text-slate-600 animate-pulse">Loading verified structural logs...</p>
                     </div>
                 </div>
-                
-                <!-- Explicit Subtitle Methodology Toggle Link -->
-                <div class="mt-4 pt-4 border-t border-slate-900 text-center lg:text-left">
-                    <a href="README.md" target="_blank" class="text-xs text-slate-500 hover:text-blue-400 transition-colors underline underline-offset-4">
-                        View Public Accounting Methodology, Mathematical Models & Data Gaps (.txt)
-                    </a>
-                </div>
             </div>
 
-                <!-- Native Referral Block (Building Revenue Equity) -->
-    <div class="bg-slate-900/50 border border-slate-800 p-6 rounded-xl flex flex-col justify-between">
-        <div>
-            <h3 class="text-sm font-bold text-slate-200 mb-1">Recommended Macro Intelligence</h3>
-            <p class="text-xs text-slate-500 leading-relaxed mb-4">
-                Our data model tracks the burn. These analysts track the geopolitical strategy. 
-            </p>
-        </div>
-        
-        <div class="space-y-3">
-            <!-- Referral Link 1 -->
-            <a href="YOUR_AFFILIATE_LINK_1" target="_blank" class="block w-full bg-slate-950 border border-slate-800 hover:border-blue-500/50 text-xs px-4 py-3 rounded text-slate-300 transition-all">
-                <span class="block font-bold text-slate-100">The Daily Macro Brief</span>
-                <span class="text-slate-500">Geopolitical strategy & market shifts.</span>
-            </a>
-            
-            <!-- Referral Link 2 -->
-            <a href="YOUR_AFFILIATE_LINK_2" target="_blank" class="block w-full bg-slate-950 border border-slate-800 hover:border-blue-500/50 text-xs px-4 py-3 rounded text-slate-300 transition-all">
-                <span class="block font-bold text-slate-100">Global Defense Outlook</span>
-                <span class="text-slate-500">Asset attrition & industrial trends.</span>
-            </a>
-        </div>
-    </div>
-                    </button>
-                </form>
+            <!-- Casualty Counter -->
+            <div class="bg-red-950/10 border border-red-900/30 p-6 rounded-xl flex flex-col justify-between">
+                <div>
+                    <h3 class="text-sm font-bold text-red-400 mb-1 uppercase tracking-wider">Verified Personnel Casualties</h3>
+                    <p class="text-[10px] text-red-800/80 leading-relaxed mb-4">
+                        Aggregated from verified mission logs and casualty manifest reports. 
+                    </p>
+                </div>
+                <div id="casualty-counter" class="text-4xl font-bold text-red-500 ticker-font">
+                    0
+                </div>
+                <div class="text-[10px] text-red-900/60 mt-2 font-semibold">
+                    TOTAL CONFIRMED IMPACTS
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Ad Slot: Footer Multiplex Block -->
-    <div class="max-w-5xl w-full mx-auto px-4 pb-6">
-        <div class="bg-slate-900/40 border border-dashed border-slate-800 p-6 text-center text-xs text-slate-600 rounded-lg">
-            <!-- PLACE NATIVE LINK DISCOVERY GRID CODE HERE -->
-            Recommended Global Economy Links
-        </div>
-    </div>
-
-    <!-- Global Footer -->
     <footer class="border-t border-slate-900 bg-slate-950 py-4 text-center text-[10px] text-slate-700">
         <p>&copy; 2026 Conflict Macro Monitor. Aggregated analytical estimation frameworks mapped against commodities tickers.</p>
     </footer>
 
-    <!-- Complete Tracker Logic Script -->
     <script>
-        // 1. Core Model Constants
         const MODEL_CONFIG = {
             peace30YrOilBaseline: 68.00,
             deployedTroopsFootprint: 50000,
@@ -146,37 +102,30 @@
         };
 
         let calculatedState = {
-            latestOilPrice: 84.20, // Will be updated by the ledger
-            historicalAccumulatedTotal: 0, // Kinetic events + Past Oil Days
+            latestOilPrice: 84.20,
+            historicalAccumulatedTotal: 0,
             secondsSinceMidnight: 0
         };
 
-        // 2. Mathematical Calculations Loop (Runs at 60fps)
         function runAccountingPipeline() {
             const now = new Date();
             const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
             calculatedState.secondsSinceMidnight = (now.getTime() - startOfToday) / 1000;
 
-            // Compute Component A: Military Operations Run Rate
             const dailyNavalCost = MODEL_CONFIG.carrierGroupsActive * MODEL_CONFIG.navalStrikeGroupDailyRun;
             const dailyPersonnelCost = MODEL_CONFIG.deployedTroopsFootprint * MODEL_CONFIG.troopTheaterPremiumDaily;
             const militaryPerSecond = (dailyNavalCost + dailyPersonnelCost) / 86400;
 
-            // Compute Component C: Today's live Oil Premium (U.S. Only - 20.6M barrels daily)
             const oilPremium = Math.max(0, calculatedState.latestOilPrice - MODEL_CONFIG.peace30YrOilBaseline);
             const globalDailyOilTax = oilPremium * 20600000; 
             const macroPerSecond = globalDailyOilTax / 86400;
 
-            // Compute Component E: Long-Term Veteran Liabilities
             const dailyVALiabilityCost = MODEL_CONFIG.deployedTroopsFootprint * MODEL_CONFIG.vaLiabilityAccrualDaily;
             const vaPerSecond = dailyVALiabilityCost / 86400;
 
             const totalCombinedRatePerSecond = militaryPerSecond + macroPerSecond + vaPerSecond;
-
-            // Absolute Total = Historical "Baked" Past + Today's live ticking
             const finalCumulativeTotal = calculatedState.historicalAccumulatedTotal + (calculatedState.secondsSinceMidnight * totalCombinedRatePerSecond);
 
-            // Print values seamlessly to interface
             document.getElementById('main-ticker').innerText = finalCumulativeTotal.toLocaleString('en-US', {
                 style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2
             });
@@ -185,50 +134,44 @@
             document.getElementById('rate-va').innerText = `+$${vaPerSecond.toFixed(2)}/sec`;
         }
 
-        // 3. Serverless Ingest Engine (Loads BOTH ledgers safely)
         async function loadLedgerAndInitialize() {
             const ledgerDisplayContainer = document.getElementById('event-ledger-display');
 
-            // Load Kinetic Munitions Ledger
+            // 1. Munitions
             try {
                 const response = await fetch('./public/data/munitions-ledger.json');
                 const munitionsData = await response.json();
                 ledgerDisplayContainer.innerHTML = ''; 
-
                 munitionsData.forEach(event => {
                     calculatedState.historicalAccumulatedTotal += event.incurredCost;
                     const logRow = document.createElement('div');
                     logRow.className = "flex justify-between items-center border-b border-slate-900 pb-1.5 text-[11px]";
-                    logRow.innerHTML = `
-                        <span class="text-slate-500">${event.date}</span>
-                        <span class="text-slate-300 font-medium px-2 truncate max-w-xs">${event.description}</span>
-                        <span class="text-red-400 font-semibold ticker-font">+$${event.incurredCost.toLocaleString()}</span>
-                    `;
+                    logRow.innerHTML = `<span class="text-slate-500">${event.date}</span><span class="text-slate-300 font-medium px-2 truncate max-w-xs">${event.description}</span><span class="text-red-400 font-semibold ticker-font">+$${event.incurredCost.toLocaleString()}</span>`;
                     ledgerDisplayContainer.appendChild(logRow);
                 });
-            } catch (e) { 
-                console.warn("Kinetic Ledger missing or failed to parse.", e); 
-                ledgerDisplayContainer.innerHTML = '<span class="text-slate-600">No verified structural events recorded yet.</span>';
-            }
+            } catch (e) { console.warn("Kinetic Ledger missing."); }
 
-            // Load Daily "Baked" Oil Macro Ledger
+            // 2. Macro/Oil
             try {
                 const response = await fetch('./public/data/macro-ledger.json');
                 const macroData = await response.json();
-                
                 macroData.forEach(day => {
                     calculatedState.historicalAccumulatedTotal += day.dailyAccumulatedCost;
                     calculatedState.latestOilPrice = day.closingOilPrice;
                 });
-            } catch (e) { 
-                console.warn("Macro Ledger building tonight at midnight."); 
-            }
+            } catch (e) { console.warn("Macro Ledger missing."); }
 
-            // Run application calculation frame loop at ~60fps
+            // 3. Casualties
+            try {
+                const response = await fetch('./public/data/casualty-ledger.json');
+                const casualtyData = await response.json();
+                let totalCasualties = casualtyData.reduce((acc, entry) => acc + (entry.confirmedCasualties || entry.incurredCasualties || 0), 0);
+                document.getElementById('casualty-counter').innerText = totalCasualties.toLocaleString();
+            } catch (e) { console.warn("Casualty ledger missing."); }
+
             setInterval(runAccountingPipeline, 16.67);
         }
 
-        // Boot system lifecycle
         window.addEventListener('DOMContentLoaded', loadLedgerAndInitialize);
     </script>
 </body>
