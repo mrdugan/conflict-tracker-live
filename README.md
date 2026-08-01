@@ -20,11 +20,13 @@ Munitions Ledger: Verified expenditures (e.g., interceptor launches, drone attri
 
 2. Personnel Impact Tracking
 
-Verified Casualty Ledger: Personnel impacts are maintained in a structured log (casualty-ledger.json). This ledger aggregates confirmed mission manifests and verified casualty counts, ensuring a human-cost-first view of operational intensity.
+Analytical Impact Estimate: Rather than relying solely on lagging official releases, our personnel figures represent an 'Analytical Impact Estimate.'
 
-3. Global Supply Chain & Commodities
+Verified Casualty Ledger: We utilize official Pentagon Defense Casualty Analysis System (DCAS) reporting as the primary baseline (casualty-ledger.json). This baseline is then dynamically adjusted by an exposure-weighted multiplier (1.25x) to account for documented reporting lags, classification re-categorization, and the exclusion of non-combat operational impacts in official tallies.
 
-Dynamic Oil Premium: The model tracks the financial delta applied to the global supply chain (~102M barrels daily) based on live Brent Crude market variations.
+3. U.S. Economic Burden & Commodities
+
+Dynamic Oil Premium: The model tracks the financial delta applied to the United States economy (~20.6M barrels consumed daily) based on live Brent Crude market variations against a historical baseline.
 
 4. Veteran Lifecycle Liabilities
 
