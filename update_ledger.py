@@ -2,31 +2,35 @@ import json
 import os
 from datetime import datetime
 
-# Path to your ledger
-file_path = 'public/data/munitions-ledger.json'
+# Paths
+MUNITIONS_PATH = 'public/data/munitions-ledger.json'
+CASUALTY_PATH = 'public/data/casualty-ledger.json'
 
 # --- YOUR DATA INPUT ---
-# Add your new verified events here when you have them.
-# Even if you leave this empty, the script will run safely without errors.
-new_events = [
-    # {
-    #     "date": "2026-07-23",
-    #     "description": "Verified Attrition Event",
-    #     "incurredCost": 5000000
-    # }
+# Add new verified data here when you have it.
+NEW_MUNITIONS = [
+    # { "date": "2026-08-01", "description": "New Surge Event", "incurredCost": 5000000 }
 ]
 
-if os.path.exists(file_path):
-    with open(file_path, 'r') as f:
-        data = json.load(f)
-else:
-    data = []
+NEW_CASUALTIES = [
+    # { "date": "2026-08-01", "description": "New Event", "confirmedCasualties": 5 }
+]
 
-# Only add if there is new data to inject
-if new_events:
-    data.extend(new_events)
-    with open(file_path, 'w') as f:
-        json.dump(data, f, indent=2)
-    print(f"Successfully injected {len(new_events)} new events.")
-else:
-    print("No new events to inject today.")
+def update_json_ledger(file_path, new_entries, key_name):
+    if not os.path.exists(file_path):
+        data = []
+    else:
+        with open(file_path, 'r') as f:
+            data = json.load(f)
+            
+    if new_entries:
+        data.extend(new_entries)
+        with open(file_path, 'w') as f:
+            json.dump(data, f, indent=2)
+        print(f"Successfully injected {len(new_entries)} entries into {key_name}.")
+    else:
+        print(f"No new entries for {key_name}.")
+
+# Run updates
+update_json_ledger(MUNITIONS_PATH, NEW_MUNITIONS, "Munitions Ledger")
+update_json_ledger(CASUALTY_PATH, NEW_CASUALTIES, "Casualty Ledger")
