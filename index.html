@@ -9,6 +9,21 @@
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=Inter:wght@400;500;600;700&display=swap');
         .ticker-font { font-family: 'Courier Prime', monospace; }
         body { font-family: 'Inter', sans-serif; }
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=Inter:wght@400;500;600;700&display=swap');
+        .ticker-font { font-family: 'Courier Prime', monospace; }
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* New high-contrast casualty styling */
+        .casualty-card {
+            background-color: #1a0505; 
+            border-color: #7f1d1d;
+        }
+        .text-casualty {
+            color: #fca5a5; /* A soft, readable red */
+            text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
+        }
+    </style>
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-red-500 selection:text-white">
@@ -77,7 +92,9 @@
                         Aggregated from verified mission logs and casualty manifest reports. 
                     </p>
                 </div>
-                <div id="casualty-counter" class="text-4xl font-bold text-red-500 ticker-font">
+                <!-- OLD: text-red-500 (Hard to read) -->
+                <!-- NEW: text-red-300 (Higher luminance, much better contrast) -->
+                <div id="casualty-counter" class="text-4xl font-bold text-red-300 ticker-font">
                     0
                 </div>
                 <div class="text-[10px] text-red-900/60 mt-2 font-semibold">
