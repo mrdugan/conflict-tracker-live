@@ -40,9 +40,13 @@
             <button onclick="toggleModal('methodology-modal')" class="text-slate-400 hover:text-blue-400 transition-colors font-medium border-b border-transparent hover:border-blue-400 uppercase tracking-wider">
                 Methodology<span class="hidden sm:inline"> & Source</span>
             </button>
-            <div class="flex items-center space-x-1 sm:space-x-2 text-slate-500">
-                <span class="hidden sm:inline">Status:</span>
+            <div class="flex items-center space-x-1 sm:space-x-2 text-slate-500 hidden sm:flex">
+                <span>Status:</span>
                 <span class="text-emerald-400 font-medium bg-emerald-950/50 px-2 py-0.5 rounded-full border border-emerald-900/40 whitespace-nowrap">Tracking Live</span>
+            </div>
+            <!-- Mobile-only status dot -->
+            <div class="flex sm:hidden items-center">
+                <span class="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
             </div>
         </div>
     </header>
@@ -113,7 +117,7 @@
             <div class="mb-5 md:mb-0 md:pr-6 text-center md:text-left">
                 <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-2">About The Developer</h4>
                 <p class="text-[13px] text-amber-200/80 leading-relaxed max-w-3xl">
-                    PoliSci grad, rescue helicopter pilot, and dad of two girls, experimenting with code to bring ideas to life. If this dashboard saved you some time (or won you an argument), consider dropping a tip in the jar!
+                    Political Science Degree holding, Combat Rescue Helicopter Flying, and Dad of 2 trying to experiment in the tools that bring ideas to life. If this dashboard saved you some time (or won you an argument), consider dropping a tip in the jar!
                 </p>
             </div>
             <a href="https://buymeacoffee.com/patdugan" target="_blank" class="shrink-0 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-lg text-sm transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_rgba(245,158,11,0.6)] flex items-center space-x-2">
@@ -154,8 +158,8 @@
                 </div>
 
                 <div>
-                    <h3 class="text-rose-400 font-bold uppercase tracking-wider mb-2 text-xs">3. Global Supply Chain & Commodities</h3>
-                    <p class="text-slate-400">The model tracks the financial delta applied to the global supply chain (~102M barrels daily) based on live Brent Crude market variations against a historical baseline.</p>
+                    <h3 class="text-rose-400 font-bold uppercase tracking-wider mb-2 text-xs">3. U.S. Economic Burden & Commodities</h3>
+                    <p class="text-slate-400">The model tracks the financial delta applied to the United States economy (~20.6M barrels consumed daily) based on live Brent Crude market variations against a historical baseline.</p>
                 </div>
 
                 <div>
