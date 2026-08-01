@@ -1,4 +1,4 @@
-E html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,9 +9,24 @@ E html>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=Inter:wght@400;500;600;700&display=swap');
         .ticker-font { font-family: 'Courier Prime', monospace; }
         body { font-family: 'Inter', sans-serif; }
+        
+        /* High-contrast casualty styling */
+        .casualty-card {
+            background-color: #1a0505; 
+            border-color: #7f1d1d;
+        }
+        .text-casualty {
+            color: #fca5a5; 
+            text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
+        }
+        
+        /* Custom scrollbar for the modal */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-rose-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-rose-500 selection:text-white relative">
 
     <!-- Global Header -->
     <header class="border-b border-slate-900 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
@@ -21,8 +36,10 @@ E html>
             <h1 class="text-sm font-bold tracking-wider uppercase text-slate-400">Conflict Macro Monitor</h1>
         </div>
         <div class="flex items-center space-x-4 text-xs">
-            <!-- Methodology Link to GitHub -->
-            <a href="https://github.com/mrdugan/conflict-tracker-live#readme" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors font-medium border-b border-transparent hover:border-blue-400 hidden sm:block">Methodology & Source</a>
+            <!-- Native Modal Trigger (No longer links to GitHub) -->
+            <button onclick="toggleModal('methodology-modal')" class="text-slate-400 hover:text-blue-400 transition-colors font-medium border-b border-transparent hover:border-blue-400 hidden sm:block uppercase tracking-wider">
+                Methodology & Source
+            </button>
             <div class="flex items-center space-x-2 text-slate-500">
                 <span>Status:</span>
                 <span class="text-emerald-400 font-medium bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-900/40">Tracking Live</span>
@@ -41,7 +58,7 @@ E html>
         <div class="bg-slate-900/60 border border-slate-900 rounded-2xl p-6 md:p-10 shadow-2xl relative overflow-hidden mb-8">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose-600 via-orange-500 to-amber-500"></div>
             
-            <div id="main-ticker" class="ticker-font text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-emerald-400 my-4 text-center">
+            <div id="main-ticker" class="ticker-font text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-emerald-400 my-4 text-center drop-shadow-[0_0_15px_rgba(52,211,153,0.2)]">
                 $0.00
             </div>
 
@@ -74,18 +91,18 @@ E html>
                 </div>
             </div>
 
-            <!-- Casualty Counter (Updated with Rose styling for contrast) -->
-            <div class="bg-rose-950/20 border border-rose-900/40 p-6 rounded-xl flex flex-col justify-between shadow-lg">
+            <!-- Casualty Counter -->
+            <div class="casualty-card border p-6 rounded-xl flex flex-col justify-between shadow-lg">
                 <div>
                     <h3 class="text-sm font-bold text-rose-300 mb-1 uppercase tracking-wider">Estimated Personnel Impact</h3>
-                    <p class="text-[11px] text-rose-200/70 leading-relaxed mb-4">
+                    <p class="text-[10px] text-rose-200/60 leading-relaxed mb-4">
                         Pentagon data adjusted by 1.25x analytical lag coefficient. 
                     </p>
                 </div>
-                <div id="casualty-counter" class="text-4xl font-bold text-rose-400 ticker-font drop-shadow-md">
+                <div id="casualty-counter" class="text-4xl font-bold text-casualty ticker-font drop-shadow-md">
                     0
                 </div>
-                <div class="text-[10px] text-rose-300/60 mt-2 font-semibold uppercase tracking-widest">
+                <div class="text-[10px] text-rose-400/50 mt-2 font-semibold uppercase tracking-widest">
                     Total Estimated Impacts
                 </div>
             </div>
@@ -109,7 +126,68 @@ E html>
         <p>&copy; 2026 Conflict Macro Monitor. Aggregated analytical estimation frameworks mapped against commodities tickers.</p>
     </footer>
 
+    <!-- Native Methodology Modal -->
+    <div id="methodology-modal" class="fixed inset-0 z-[100] hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl p-6 md:p-8 max-w-3xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative">
+            <!-- Close Button -->
+            <button onclick="toggleModal('methodology-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-rose-400 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <h2 class="text-xl font-bold text-slate-200 mb-6 uppercase tracking-wider border-b border-slate-800 pb-4">Methodology & Framework</h2>
+            
+            <div class="space-y-6 text-sm text-slate-300 leading-relaxed">
+                <p>
+                    This project tracks the cumulative cost variables and verified personnel impacts associated with regional actions. The framework utilizes a structured, automated accounting ledger to ensure macroeconomic transparency.
+                </p>
+
+                <div>
+                    <h3 class="text-rose-400 font-bold uppercase tracking-wider mb-2 text-xs">1. Military & Kinetic Operations</h3>
+                    <p class="text-slate-400">Standardized daily theater costs including Naval Carrier Strike Group (CSG) deployments and personnel hazardous duty premiums. Verified expenditures (e.g., interceptor launches, drone attrition) are indexed via our kinetic ledger and automatically calculated into the cumulative total.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-rose-400 font-bold uppercase tracking-wider mb-2 text-xs">2. Personnel Impact Tracking</h3>
+                    <p class="text-slate-400">Figures represent an 'Analytical Impact Estimate.' We utilize official Pentagon DCAS reporting as the primary baseline, which is then dynamically adjusted by an exposure-weighted multiplier (1.25x) to account for documented reporting lags, classification re-categorization, and the exclusion of non-combat operational impacts in official tallies.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-rose-400 font-bold uppercase tracking-wider mb-2 text-xs">3. Global Supply Chain & Commodities</h3>
+                    <p class="text-slate-400">The model tracks the financial delta applied to the global supply chain (~102M barrels daily) based on live Brent Crude market variations against a historical baseline.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-rose-400 font-bold uppercase tracking-wider mb-2 text-xs">4. Veteran Lifecycle Liabilities</h3>
+                    <p class="text-slate-400">Accrues a structural liability model of $90,000 per soldier/year of deployment, mapped against Congressional Budget Office long-term care projections.</p>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-slate-800 text-center">
+                <button onclick="toggleModal('methodology-modal')" class="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition-colors">
+                    Close Documentation
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Modal Logic
+        function toggleModal(modalID) {
+            const modal = document.getElementById(modalID);
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                // Small delay to allow display:block to apply before fading in
+                setTimeout(() => modal.classList.remove('opacity-0'), 10); 
+            } else {
+                modal.classList.add('opacity-0');
+                // Wait for fade out transition before hiding completely
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+        }
+
+        // --- Core Application Logic ---
         const MODEL_CONFIG = {
             peace30YrOilBaseline: 68.00,
             deployedTroopsFootprint: 50000,
@@ -157,7 +235,7 @@ E html>
 
             // 1. Munitions
             try {
-                // Adjust to './data/...' if you encounter 404 errors on your live site
+                // Ensure this path matches your root deployment layout
                 const response = await fetch('./public/data/munitions-ledger.json');
                 const munitionsData = await response.json();
                 ledgerDisplayContainer.innerHTML = ''; 
@@ -165,7 +243,6 @@ E html>
                     calculatedState.historicalAccumulatedTotal += event.incurredCost;
                     const logRow = document.createElement('div');
                     logRow.className = "flex justify-between items-center border-b border-slate-900 pb-1.5 text-[11px]";
-                    // Updated the money color here to Rose-400 for better readability
                     logRow.innerHTML = `<span class="text-slate-500">${event.date}</span><span class="text-slate-300 font-medium px-2 truncate max-w-xs">${event.description}</span><span class="text-rose-400 font-semibold ticker-font">+$${event.incurredCost.toLocaleString()}</span>`;
                     ledgerDisplayContainer.appendChild(logRow);
                 });
@@ -189,7 +266,6 @@ E html>
                 
                 // Apply the 1.25x analytical lag coefficient here for the display
                 const estimatedImpact = Math.floor(totalCasualties * 1.25);
-                
                 document.getElementById('casualty-counter').innerText = estimatedImpact.toLocaleString();
             } catch (e) { console.warn("Casualty ledger missing."); }
 
