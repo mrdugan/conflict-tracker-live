@@ -1,0 +1,17 @@
+[
+  {
+    "date": "2026-02-28",
+    "description": "Initial Strategic Intercept Manifest",
+    "confirmedCasualties": 42
+  },
+  {
+    "date": "2026-03-15",
+    "description": "Carrier Taskforce Air Engagement",
+    "confirmedCasualties": 18
+  },
+  {
+    "date": "2026-04-02",
+    "description": "Asset Chassis Attrition Incident",
+    "incurredCasualties": 12
+  }
+]
