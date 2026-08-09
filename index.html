@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conflict Cost Tracker | Macroeconomic Data Dashboard</title>
-    <!-- Primary Meta Tags -->
-    <title>Live Conflict Macro Monitor | Iran 2026 Operations</title>
+    
+    <!-- Primary Meta Tags & Canonical Link (SEO) -->
+    <title>Live Conflict Macro Monitor | US Economic Tracker</title>
+    <link rel="canonical" href="https://www.iranwarcostticker.com/" />
     <meta name="title" content="Live Conflict Macro Monitor | US Economic & Casualty Tracker">
-    <meta name="description" content="Real-time open-source intelligence (OSINT) dashboard tracking the macroeconomic, kinetic, and personnel costs of the 2026 Iran conflict.">
+    <meta name="description" content="Real-time deterministic OSINT dashboard tracking the macroeconomic, kinetic, and estimated personnel costs of regional conflict.">
     <meta name="keywords" content="Iran war cost, US military expenditure, conflict tracker, OSINT, pentagon budget live, DoD casualties, macroeconomic impact">
     <meta name="author" content="Conflict Macro Monitor">
-    
-    <!-- Open Graph / Facebook (How it looks when texted or shared) -->
+
+    <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="[https://www.iranwarcostticker.com/](https://www.iranwarcostticker.com/)">
+    <meta property="og:url" content="https://www.iranwarcostticker.com/">
     <meta property="og:title" content="Live Conflict Macro Monitor | US Economic & Casualty Tracker">
     <meta property="og:description" content="Real-time open-source intelligence dashboard tracking macroeconomic and kinetic costs.">
-    <meta property="og:image" content="[https://www.iranwarcostticker.com/preview-image.jpg](https://www.iranwarcostticker.com/preview-image.jpg)"> <!-- Note: You would need to take a screenshot and upload it to your repo as preview-image.jpg -->
     
     <!-- Twitter / X -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="[https://www.iranwarcostticker.com/](https://www.iranwarcostticker.com/)">
+    <meta property="twitter:url" content="https://www.iranwarcostticker.com/">
     <meta property="twitter:title" content="Live Conflict Macro Monitor | US Economic & Casualty Tracker">
     <meta property="twitter:description" content="Real-time open-source intelligence dashboard tracking macroeconomic and kinetic costs.">
 
@@ -56,7 +56,7 @@
             <h1 class="text-xs sm:text-sm font-bold tracking-wider uppercase text-slate-400">Conflict Macro Monitor</h1>
         </div>
         <div class="flex items-center space-x-3 sm:space-x-4 text-[10px] sm:text-xs">
-            <!-- Native Modal Trigger (Now visible on mobile) -->
+            <!-- Native Modal Trigger -->
             <button onclick="toggleModal('methodology-modal')" class="text-slate-400 hover:text-blue-400 transition-colors font-medium border-b border-transparent hover:border-blue-400 uppercase tracking-wider">
                 Methodology<span class="hidden sm:inline"> & Source</span>
             </button>
@@ -202,11 +202,9 @@
             const modal = document.getElementById(modalID);
             if (modal.classList.contains('hidden')) {
                 modal.classList.remove('hidden');
-                // Small delay to allow display:block to apply before fading in
                 setTimeout(() => modal.classList.remove('opacity-0'), 10); 
             } else {
                 modal.classList.add('opacity-0');
-                // Wait for fade out transition before hiding completely
                 setTimeout(() => modal.classList.add('hidden'), 300);
             }
         }
@@ -259,7 +257,6 @@
 
             // 1. Munitions
             try {
-                // Ensure this path matches your root deployment layout
                 const response = await fetch('./public/data/munitions-ledger.json');
                 const munitionsData = await response.json();
                 ledgerDisplayContainer.innerHTML = ''; 
@@ -288,7 +285,6 @@
                 const casualtyData = await response.json();
                 let totalCasualties = casualtyData.reduce((acc, entry) => acc + (entry.confirmedCasualties || entry.incurredCasualties || 0), 0);
                 
-                // Apply the 1.25x analytical lag coefficient here for the display
                 const estimatedImpact = Math.floor(totalCasualties * 1.25);
                 document.getElementById('casualty-counter').innerText = estimatedImpact.toLocaleString();
             } catch (e) { console.warn("Casualty ledger missing."); }
