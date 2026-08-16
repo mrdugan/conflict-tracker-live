@@ -221,7 +221,8 @@
 
         let calculatedState = {
             latestOilPrice: 84.20,
-            historicalAccumulatedTotal: 0,
+            // UPDATED: Based on August 2026 CSIS high-end military estimates ($41.5B) + CAP Consumer Burden ($80B)
+            historicalAccumulatedTotal: 121500000000, 
             secondsSinceMidnight: 0
         };
 
@@ -261,7 +262,7 @@
                 const munitionsData = await response.json();
                 ledgerDisplayContainer.innerHTML = ''; 
                 munitionsData.forEach(event => {
-                    calculatedState.historicalAccumulatedTotal += event.incurredCost;
+                    // We DO NOT add these to the total here, because they are already baked into the 121.5B baseline
                     const logRow = document.createElement('div');
                     logRow.className = "flex justify-between items-center border-b border-slate-900 pb-1.5 text-[11px]";
                     logRow.innerHTML = `<span class="text-slate-500">${event.date}</span><span class="text-slate-300 font-medium px-2 truncate max-w-xs">${event.description}</span><span class="text-rose-400 font-semibold ticker-font">+$${event.incurredCost.toLocaleString()}</span>`;
@@ -274,7 +275,7 @@
                 const response = await fetch('./public/data/macro-ledger.json');
                 const macroData = await response.json();
                 macroData.forEach(day => {
-                    calculatedState.historicalAccumulatedTotal += day.dailyAccumulatedCost;
+                    // We DO NOT add these to the total here, because they are already baked into the 121.5B baseline
                     calculatedState.latestOilPrice = day.closingOilPrice;
                 });
             } catch (e) { console.warn("Macro Ledger missing."); }
