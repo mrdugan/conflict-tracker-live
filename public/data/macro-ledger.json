@@ -148,5 +148,10 @@
     "date": "2026-08-18",
     "closingOilPrice": 91.12,
     "dailyAccumulatedCost": 476272000.0000001
+  },
+  {
+    "date": "2026-08-19",
+    "closingOilPrice": 91.72,
+    "dailyAccumulatedCost": 488632000
   }
 ]
