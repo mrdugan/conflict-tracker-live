@@ -323,5 +323,10 @@
     "date": "2026-09-22",
     "closingOilPrice": 97.24,
     "dailyAccumulatedCost": 602343999.9999999
+  },
+  {
+    "date": "2026-09-23",
+    "closingOilPrice": 98.75,
+    "dailyAccumulatedCost": 633450000
   }
 ]
